@@ -2,20 +2,40 @@ package main
 
 import "math/rand"
 
-
-
 type Boid struct {
-	Postion vector2D
+	Position vector2D
 	Velocity vector2D
-	Id int
+	Id       int
 }
 
-func boidConstructor(id int) *Boid {
+func boidConstructor(id int) {
 	b := Boid{
-		Postion: vector2D{rand.Float64() * screenWidth, rand.Float64() * screenHeight},
+		Position: vector2D{rand.Float64() * (screenWidth * 2), rand.Float64() * (screenHeight * 2)},
 		Velocity: vector2D{(rand.Float64() * 2) - 1.0, (rand.Float64() * 2) - 1.0},
-		Id: id,	
+		Id:       id,
 	}
 
 	boids[id] = &b
+
+	// go b.movement()
 }
+
+// func (b *Boid) movement () {
+// 	for {
+// 		b.move()
+
+// 	}
+
+
+}
+
+
+// func (b *Boid) move()  {
+// 	b.Position = b.Position.Add(b.Velocity)
+// 	nextPixel := b.Position.Add(b.Velocity)
+
+// 	if nextPixel.x >= (screenWidth * 2) || nextPixel.x < 0 {
+// 		b.Velocity = vector2D{-b.Velocity.x, -b.Velocity.y}
+// 	}
+
+// }
