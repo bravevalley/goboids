@@ -54,7 +54,10 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
-
+	// Create a boid for the max number of boids
+	for i := 1; i <= noBoids; i++ {
+		boidConstructor(i)
+	}
 	
 
 
