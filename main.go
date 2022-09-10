@@ -60,7 +60,7 @@ func main() {
 
 	game := &Game{}
 	// Specify the window size as you like. Here, a doubled size is specified.
-	ebiten.SetWindowSize(screenWidth * 2, screenHeight * 2)
+	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
 	ebiten.SetWindowTitle("Go Go Boids!!!")
 	// Call ebiten.RunGame to start your game loop.
 	if err := ebiten.RunGame(game); err != nil {

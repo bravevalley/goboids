@@ -1,6 +1,9 @@
 package main
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
 type Boid struct {
 	Position vector2D
@@ -17,25 +20,26 @@ func boidConstructor(id int) {
 
 	boids[id] = &b
 
-	// go b.movement()
+	go b.movement()
 }
 
-// func (b *Boid) movement () {
-// 	for {
-// 		b.move()
-
-// 	}
-
+func (b *Boid) movement() {
+	for {
+		b.move()
+		time.Sleep(time.Millisecond * 5)
+	}
 
 }
 
+func (b *Boid) move() {
+	b.Position = b.Position.Add(b.Velocity)
+	nextPixel := b.Position.Add(b.Velocity)
 
-// func (b *Boid) move()  {
-// 	b.Position = b.Position.Add(b.Velocity)
-// 	nextPixel := b.Position.Add(b.Velocity)
+	if nextPixel.x >= (screenWidth*2) || nextPixel.x < 0 {
+		b.Velocity = vector2D{-b.Velocity.x, b.Velocity.y}
+	}
+	if nextPixel.y >= (screenHeight*2) || nextPixel.y < 0 {
+		b.Velocity = vector2D{b.Velocity.x, -b.Velocity.y}
+	}
 
-// 	if nextPixel.x >= (screenWidth * 2) || nextPixel.x < 0 {
-// 		b.Velocity = vector2D{-b.Velocity.x, -b.Velocity.y}
-// 	}
-
-// }
+}
