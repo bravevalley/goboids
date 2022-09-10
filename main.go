@@ -2,6 +2,7 @@ package main
 
 import (
 	"image/color"
+	"log"
 
 	"github.com/hajimehoshi/ebiten"
 )
@@ -10,9 +11,18 @@ import (
 const (
 	// The screen Width and Screen Height for our simualtion
 	screenWidth, screenHeight = 640, 360 
+
+	// Number of boids in the sky
+	noBoids = 400
 )
 
-var pix = color.RGBA{249, 105, 14, 255}
+// The colour of our boid
+var (
+	pix = color.RGBA{249, 105, 14, 255}
+	boids = []*boid{}
+)
+
+
 // Game implements ebiten.Game interface.
 type Game struct{}
 
@@ -25,10 +35,10 @@ func (g *Game) Update() error {
 
 // Draw draws the game screen.
 // Draw is called every frame (typically 1/60[s] for 60Hz display).
-func (g *Game) Draw(screen *ebiten.Image, boid *boids) {
+func (g *Game) Draw(screen *ebiten.Image) {
 	// Write your game's rendering.
 
-	for _, v := range boid {
+	for _, v := range boids {
 		screen.Set(int(v.x + 1), int(v.y), pix)
 		screen.Set(int(v.x - 1), int(v.y), pix)
 		screen.Set(int(v.x), int(v.y + 1), pix)
@@ -44,6 +54,10 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
+
+	
+
+
 	game := &Game{}
 	// Specify the window size as you like. Here, a doubled size is specified.
 	ebiten.SetWindowSize(screenWidth, screenHeight)
