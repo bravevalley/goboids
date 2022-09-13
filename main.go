@@ -14,12 +14,17 @@ const (
 
 	// Number of boids in the sky
 	noBoids = 400
+	adjRate = 0.020
+	boidRaduis = 10
 )
 
 // The colour of our boid
 var (
 	pix   = color.RGBA{249, 105, 14, 255}
 	boids = make([]*Boid, 400, 500)
+	screenWidthSlice = make([]int, screenWidth)
+	screenHeightSlice = make([]int, screenHeight)
+	boidMap = make([][]int, (screenWidth * screenHeight))
 )
 
 // Game implements ebiten.Game interface.
@@ -57,6 +62,14 @@ func main() {
 	for i := 0; i < noBoids; i++ {
 		boidConstructor(i)
 	}
+
+	// Set up the array for the screen
+	for row:=0; row< screenWidth; row++ {
+		for column:=0; column< screenHeight; column++ {
+			boidMap[row][column] = -1
+		}
+	}
+
 
 	game := &Game{}
 	// Specify the window size as you like. Here, a doubled size is specified.
