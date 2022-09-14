@@ -14,17 +14,27 @@ const (
 
 	// Number of boids in the sky
 	noBoids = 400
-	adjRate = 0.020
-	boidRaduis = 10
+
+	// The percent of change we want
+	perChange = 0.020
+
+	// The radius at which the boid can peek
+	boidRadius = 10
 )
 
-// The colour of our boid
 var (
-	pix   = color.RGBA{249, 105, 14, 255}
+	// The colour of our boid
+	pix = color.RGBA{249, 105, 14, 255}
+
+	// Slice of the pointer to each boid
 	boids = make([]*Boid, 400, 500)
-	screenWidthSlice = make([]int, screenWidth)
-	screenHeightSlice = make([]int, screenHeight)
-	boidMap = make([][]int, (screenWidth * screenHeight))
+
+	// Embedded Struct representing screen width and height
+	// screenWidthSlice  = make([]int, screenWidth+1)
+	// screenHeightSlice = make([]int, screenHeight+1)
+	// boidMap           = make([][]int, screenWidth)
+
+	boidMap [screenWidth + 1][screenHeight + 1]int
 )
 
 // Game implements ebiten.Game interface.
@@ -58,18 +68,25 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
+
+	// Set up the array for the screen
+	for i, row := range boidMap {
+		for j := range row {
+			boidMap[i][j] = -1
+		}
+	}
+
+	// boidMap = [][]int{screenWidthSlice, screenHeightSlice}
+	// for row := 0; row <= screenWidth; row++ {
+	// 	for column := 0; column <= screenHeight; column++ {
+	// 		boidMap[row][column] = -1
+	// 	}
+	// }
+
 	// Create a boid for the max number of boids
 	for i := 0; i < noBoids; i++ {
 		boidConstructor(i)
 	}
-
-	// Set up the array for the screen
-	for row:=0; row< screenWidth; row++ {
-		for column:=0; column< screenHeight; column++ {
-			boidMap[row][column] = -1
-		}
-	}
-
 
 	game := &Game{}
 	// Specify the window size as you like. Here, a doubled size is specified.
