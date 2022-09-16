@@ -34,7 +34,7 @@ var (
 	// screenHeightSlice = make([]int, screenHeight+1)
 	// boidMap           = make([][]int, screenWidth)
 
-	boidMap [screenWidth + 1][screenHeight + 1]int
+	boidMap [screenWidth*2 + 1][screenHeight*2 + 1]int
 )
 
 // Game implements ebiten.Game interface.
