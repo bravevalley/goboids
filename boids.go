@@ -15,7 +15,7 @@ type Boid struct {
 func boidConstructor(id int) {
 	// Create a Boid with position and velocity
 	b := Boid{
-		Position: vector2D{rand.Float64() * (screenWidth * 2), rand.Float64() * (screenHeight * 2)},
+		Position: vector2D{rand.Float64() * screenWidth, rand.Float64() * screenHeight},
 		Velocity: vector2D{(rand.Float64() * 2) - 1.0, (rand.Float64() * 2) - 1.0},
 		// Velocity: vector2D{rand.Float64() , rand.Float64()},
 		Id: id,
@@ -59,7 +59,7 @@ func (b *Boid) calcAccer() vector2D {
 
 	if count > 0 {
 		avrVel = avrVel.DivideV(float64(count))
-		accer = avrVel.Subtract(avrVel).MultiplyV(perChange)
+		accer = avrVel.Subtract(b.Velocity).MultiplyV(perChange)
 	}
 
 	return accer
@@ -81,11 +81,11 @@ func (b *Boid) move() {
 	nextPixel := b.Position.Add(b.Velocity)
 
 	// Test for impact against the wall and invert the movement of the boid
-	if nextPixel.x >= (screenWidth*2) || nextPixel.x < 0 {
+	if nextPixel.x >= screenWidth || nextPixel.x < 0 {
 		b.Velocity = vector2D{-b.Velocity.x, b.Velocity.y}
 	}
 
-	if nextPixel.y >= (screenHeight*2) || nextPixel.y < 0 {
+	if nextPixel.y >= screenHeight || nextPixel.y < 0 {
 		b.Velocity = vector2D{b.Velocity.x, -b.Velocity.y}
 	}
 

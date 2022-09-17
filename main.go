@@ -10,7 +10,7 @@ import (
 // constant values
 const (
 	// The screen Width and Screen Height for our simualtion
-	screenWidth, screenHeight = 640, 360
+	screenWidth, screenHeight = 640 * 2, 360 * 2
 
 	// Number of boids in the sky
 	noBoids = 400
@@ -34,7 +34,7 @@ var (
 	// screenHeightSlice = make([]int, screenHeight+1)
 	// boidMap           = make([][]int, screenWidth)
 
-	boidMap [screenWidth*2 + 1][screenHeight*2 + 1]int
+	boidMap [screenWidth + 1][screenHeight + 1]int
 )
 
 // Game implements ebiten.Game interface.
@@ -90,7 +90,7 @@ func main() {
 
 	game := &Game{}
 	// Specify the window size as you like. Here, a doubled size is specified.
-	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
+	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Go Go Boids!!!")
 	// Call ebiten.RunGame to start your game loop.
 	if err := ebiten.RunGame(game); err != nil {
