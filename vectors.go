@@ -32,3 +32,8 @@ func (v1 vector2D) MultiplyV(value float64) vector2D {
 func (v1 vector2D) Distance(v2 vector2D) float64 {
 	return math.Sqrt(math.Pow(v1.x-v2.x, 2) + math.Pow(v1.y-v2.y, 2))
 }
+
+func (v1 vector2D) limitV(upperV, lowerV float64) vector2D {
+	return vector2D{math.Max(math.Min(v1.x, upperV), lowerV),
+		math.Max(math.Min(v1.y, upperV), lowerV)}
+}

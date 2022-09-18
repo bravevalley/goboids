@@ -3,6 +3,7 @@ package main
 import (
 	"image/color"
 	"log"
+	"sync"
 
 	"github.com/hajimehoshi/ebiten"
 )
@@ -23,6 +24,9 @@ const (
 )
 
 var (
+	rWlock = sync.RWMutex{}
+	// Mutual Exclusion
+
 	// The colour of our boid
 	pix = color.RGBA{249, 105, 14, 255}
 
