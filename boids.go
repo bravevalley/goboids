@@ -114,5 +114,7 @@ func (b *Boid) borderBounce(position, maxBorderPos float64) float64 {
 		// This way you are mnoving away from the limit
 		return 1 / (position - maxBorderPos)
 	}
+
+	// Unreachable
 	return 0
 }
